@@ -1,0 +1,29 @@
+# Build / dependencias
+**/target/
+**/node_modules/
+**/dist/
+**/dist-app/
+*.jar
+!**/mvnw
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# Entorno y secretos
+.env
+.env.*
+!.env.example
+
+# IDE y OS
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+Thumbs.db
+
+# Logs y caché
+*.log
+npm-debug.log*
+.npm/
+
+# Postman / local (opcional — la colección SÍ se sube en postman/)
