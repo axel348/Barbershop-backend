@@ -1,11 +1,18 @@
 package com.barbershop.bff;
 
+import com.barbershop.bff.config.CartServiceProperties;
+import com.barbershop.bff.config.ProductServiceProperties;
+import com.barbershop.bff.config.UserServiceProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-/**
- * BFF: punto único de entrada para el frontend de la barbería.
- */
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
 @SpringBootApplication
+@EnableConfigurationProperties({
+        ProductServiceProperties.class,
+        UserServiceProperties.class,
+        CartServiceProperties.class
+})
 public class BarberShopBffApplication {
 
     public static void main(String[] args) {

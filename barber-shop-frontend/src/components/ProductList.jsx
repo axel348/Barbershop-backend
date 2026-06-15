@@ -17,6 +17,8 @@ export default function ProductList({
   loading = false,
   error = null,
   onRetry,
+  onAddToCart,
+  addingToCart = false,
 }) {
   if (loading) {
     return <LoadingState />;
@@ -64,7 +66,12 @@ export default function ProductList({
       {!error && products.length > 0 && (
         <div className="product-grid">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={onAddToCart}
+              addingToCart={addingToCart}
+            />
           ))}
         </div>
       )}

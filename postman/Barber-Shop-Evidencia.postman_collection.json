@@ -1,0 +1,93 @@
+{
+  "info": {
+    "name": "Barber Shop — API REST (EP3)",
+    "description": "Colección Postman — BFF + microservicios. Levantar product (8081), user (8082), BFF (8080).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "bff", "value": "http://localhost:8080" },
+    { "key": "product", "value": "http://localhost:8081" },
+    { "key": "user", "value": "http://localhost:8082" }
+  ],
+  "item": [
+    {
+      "name": "BFF — Integración frontend",
+      "item": [
+        {
+          "name": "GET Listar productos",
+          "request": { "method": "GET", "url": "{{bff}}/bff/products" }
+        },
+        {
+          "name": "GET Producto por ID",
+          "request": { "method": "GET", "url": "{{bff}}/bff/products/1" }
+        },
+        {
+          "name": "GET Por categoría",
+          "request": { "method": "GET", "url": "{{bff}}/bff/products/category/HERRAMIENTAS" }
+        },
+        {
+          "name": "POST Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"juan@email.com\",\"password\":\"cliente123\"}"
+            },
+            "url": "{{bff}}/bff/auth/login"
+          }
+        },
+        {
+          "name": "POST Registro",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Prueba EP3\",\"email\":\"ep3@test.com\",\"password\":\"cliente123\",\"role\":\"CLIENT\"}"
+            },
+            "url": "{{bff}}/bff/auth/register"
+          }
+        }
+      ]
+    },
+    {
+      "name": "product-service — Persistencia JPA",
+      "item": [
+        {
+          "name": "GET /api/products",
+          "request": { "method": "GET", "url": "{{product}}/api/products" }
+        },
+        {
+          "name": "POST Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Shampoo barba\",\"description\":\"Limpieza\",\"category\":\"CUIDADO_BARBA\",\"brand\":\"BarberPro\",\"price\":9990,\"stock\":20}"
+            },
+            "url": "{{product}}/api/products"
+          }
+        }
+      ]
+    },
+    {
+      "name": "user-service — Persistencia JPA",
+      "item": [
+        {
+          "name": "POST Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@barberia.com\",\"password\":\"admin123\"}"
+            },
+            "url": "{{user}}/api/users/login"
+          }
+        }
+      ]
+    }
+  ]
+}

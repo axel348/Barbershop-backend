@@ -1,7 +1,10 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useCartContext } from '../context/CartContext.jsx';
 
 export default function Navbar({ user, onLogout }) {
   const navigate = useNavigate();
+  const { itemCount } = useCartContext();
+  const isAdmin = user?.role === 'ADMIN';
 
   const handleLogout = () => {
     onLogout?.();
@@ -24,6 +27,31 @@ export default function Navbar({ user, onLogout }) {
           >
             Productos
           </NavLink>
+
+          <NavLink
+            to="/carrito"
+            className={({ isActive }) =>
+              `navbar__link navbar__cart-link${isActive ? ' navbar__link--active' : ''}`
+            }
+          >
+            Carrito
+            {itemCount > 0 && (
+              <span className="navbar__cart-badge" aria-label={`${itemCount} ítems`}>
+                {itemCount}
+              </span>
+            )}
+          </NavLink>
+
+          {isAdmin && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                `navbar__link${isActive ? ' navbar__link--active' : ''}`
+              }
+            >
+              Admin
+            </NavLink>
+          )}
 
           {user ? (
             <>

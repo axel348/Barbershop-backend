@@ -3,6 +3,7 @@
 **/node_modules/
 **/dist/
 **/dist-app/
+**/coverage/
 *.jar
 !**/mvnw
 !**/.mvn/wrapper/maven-wrapper.jar
@@ -27,3 +28,6 @@ npm-debug.log*
 .npm/
 
 # Postman / local (opcional — la colección SÍ se sube en postman/)
+
+# Local Netlify folder
+.netlify

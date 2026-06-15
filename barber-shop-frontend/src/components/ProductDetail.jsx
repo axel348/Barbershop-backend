@@ -10,7 +10,14 @@ function LoadingState() {
   );
 }
 
-export default function ProductDetail({ product, loading, error, onRetry }) {
+export default function ProductDetail({
+  product,
+  loading,
+  error,
+  onRetry,
+  onAddToCart,
+  addingToCart = false,
+}) {
   if (loading) {
     return <LoadingState />;
   }
@@ -43,6 +50,7 @@ export default function ProductDetail({ product, loading, error, onRetry }) {
   }
 
   const { name, description, brand, category, price, stock } = product;
+  const canAdd = stock > 0;
 
   return (
     <article className="product-detail">
@@ -62,9 +70,19 @@ export default function ProductDetail({ product, loading, error, onRetry }) {
         </p>
       </div>
 
-      <Link to="/productos" className="btn btn-ghost">
-        ← Volver al catálogo
-      </Link>
+      <div className="product-detail__actions">
+        <button
+          type="button"
+          className="btn btn-primary"
+          disabled={!canAdd || addingToCart}
+          onClick={() => onAddToCart?.(product)}
+        >
+          {addingToCart ? 'Agregando…' : 'Agregar al carrito'}
+        </button>
+        <Link to="/productos" className="btn btn-ghost">
+          ← Volver al catálogo
+        </Link>
+      </div>
     </article>
   );
 }

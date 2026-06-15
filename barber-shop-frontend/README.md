@@ -45,6 +45,38 @@ Abre [http://localhost:3000](http://localhost:3000).
 | `npm run build` | App standalone → carpeta `dist-app/` |
 | `npm run build:lib` | Paquete NPM → carpeta `dist/` |
 | `npm run preview` | Vista previa del build de app |
+| `npm run preview:netlify` | Vista previa del build `dist-app/` |
+
+## Despliegue en Netlify
+
+### Opción A — Desde GitHub (recomendado)
+
+1. Sube el repo a GitHub.
+2. En [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import from Git**.
+3. Configuración:
+   - **Base directory:** `barber-shop-frontend`
+   - **Build command:** `npm run build`
+   - **Publish directory:** `barber-shop-frontend/dist-app`
+4. **Environment variables** (Site settings → Environment variables):
+   - `VITE_API_BASE_URL` = URL pública de tu BFF (ej. Render/Railway)
+5. Deploy.
+
+### Opción B — CLI (manual)
+
+```powershell
+cd barber-shop-frontend
+npm install
+npm run build
+npx netlify-cli login
+npx netlify-cli init
+npx netlify-cli deploy --prod --dir=dist-app
+```
+
+### Importante: backend en producción
+
+Netlify solo hospeda el **frontend estático**. Para que productos y login funcionen en internet, el **BFF** (y microservicios) deben estar desplegados en otro servicio (Render, Railway, etc.) y la variable `VITE_API_BASE_URL` debe apuntar a esa URL.
+
+El archivo `netlify.toml` y `public/_redirects` ya configuran las rutas de React Router.
 
 ## Endpoints consumidos (BFF)
 
@@ -179,6 +211,15 @@ Si el `user-service` tiene datos de ejemplo (ver `data.sql` del backend):
 
 - Email: `juan@email.com`
 - Contraseña: `cliente123`
+
+## Pruebas (Evaluación Parcial 3)
+
+```powershell
+npm run test
+npm run test:coverage
+```
+
+Reporte HTML: `coverage/index.html` (umbral mínimo 60%).
 
 ## Publicar en NPM
 

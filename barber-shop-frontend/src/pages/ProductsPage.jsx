@@ -1,8 +1,10 @@
 import ProductList from '../components/ProductList.jsx';
+import { useCartContext } from '../context/CartContext.jsx';
 import { useProducts } from '../hooks/useProducts.js';
 
 export default function ProductsPage() {
   const { products, category, setCategory, loading, error, reload } = useProducts();
+  const { addToCart, actionLoading: cartActionLoading } = useCartContext();
 
   return (
     <>
@@ -17,6 +19,8 @@ export default function ProductsPage() {
         loading={loading}
         error={error}
         onRetry={reload}
+        onAddToCart={addToCart}
+        addingToCart={cartActionLoading}
       />
     </>
   );

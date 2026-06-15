@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * Configuración del cliente HTTP RestTemplate.
  */
 @Configuration
-@EnableConfigurationProperties({ProductServiceProperties.class, UserServiceProperties.class})
+@EnableConfigurationProperties({ProductServiceProperties.class, UserServiceProperties.class, CartServiceProperties.class})
 public class RestTemplateConfig {
 
     @Bean

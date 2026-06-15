@@ -13,6 +13,24 @@ export default defineConfig(({ mode }) => {
         env.VITE_API_BASE_URL || 'http://localhost:8080'
       ),
     },
+    test: {
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: './src/test/setup.js',
+      coverage: {
+        provider: 'v8',
+        all: false,
+        include: ['src/services/**', 'src/constants/**', 'src/components/ProductCard.jsx'],
+        reporter: ['text', 'html', 'json-summary'],
+        reportsDirectory: './coverage',
+        thresholds: {
+          lines: 60,
+          functions: 60,
+          branches: 55,
+          statements: 60,
+        },
+      },
+    },
     server: {
       port: 3000,
       open: true,
